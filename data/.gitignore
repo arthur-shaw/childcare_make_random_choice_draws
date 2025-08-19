@@ -1,0 +1,2 @@
+# do not track output data of discrete choice draws
+*.tsv
