@@ -21,8 +21,8 @@ fs::path(proj_dir, "R") |>
 choices_df <- make_random_choices_per_member(
   n_hholds = 2000,
   n_members = 45,
-  choices = c(1:150),
-  n_choices = 10,
+  choices = c(1:60),
+  n_choices = 6,
   seed = 8675309
 )
 
