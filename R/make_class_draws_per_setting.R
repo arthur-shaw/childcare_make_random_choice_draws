@@ -1,88 +1,91 @@
-#' Make a comma-separated list of up to 2 draws
+#' Make a comma-separated list of numbers to reorder classes
 #'
 #' @description
-#' Construct a comma-separated list of up to 2 random draws.
+#' Implement the following algorithm:
 #'
-#' From the set of integers between 1 and N, draw up to 2 random numbers.
-#' If N == 1, draw 1 with certainty. For N > 1, draw 2 numbers without
-#' replacement.
+#' - Construct a set of numbers from 1 to `n`
+#' - Select `n` elements from that list without replacement
+#' - Return the list of numbers as a comma-separated atomic character vector.
 #'
-#' Return the draws as an atomic character vector composed of a comma-separated
-#' list.
-#' 
-#' @param n_classes Numeric. Number of classes in the childcare setting.
+#' @param n Numeric upper end of the range for the number list.
 #'
-#' @return Character. Comma-separated list of up to 2 numbers between 1 and N.
-make_draw <- function(
-  n_classes
-) {
+#' @return Character Comma-separated list of numbers from 1 to `n`.
+make_order_numbers_for_group <- function(n = 50) {
+  order_numbers_vec <- base::sample(
+    x = c(1:n),
+    size = n,
+    replace = FALSE
+  )
 
-  if (n_classes == 1) {
+  order_numbers_chr <- as.character(order_numbers_vec) |>
+    paste(collapse = ",")
 
-    return("1")
-
-  } else {
-
-    draw <- sample(
-      x = c(1:n_classes),
-      size = 2,
-      replace = FALSE
-    )
-
-    draw_chr <- as.character(draw) |>
-      paste(collapse = ",")
-
-    return(draw_chr)
-
-  }
+  return(order_numbers_chr)
 
 }
 
-#' Make N sets of draws per childcare setting, one for each
-#' possible number of classes in a childcare setting.
+#' Make a nested list of numbers to reorder classes
 #'
-#' @param n_classes Number of (possible) classes for which to make a draw.
+#' @description
+#' Classes fall into 3 age-based sampling categories:
 #'
-#' @return Character vector of draws of size `n_classes`.
+#' - Ages 0-3
+#' - Ages > 3
+#' - Mixed ages, where min and max ages that span the two categories
 #'
-#' @importFrom purrr map_chr
-make_draws_per_setting <- function(
-  n_classes = 200
-) {
+#' Accordingly, create a character list that is structured as follows:
+#'
+#' - Each category's list is delimited by `;`
+#' - Each category's numbers are delimited by `,`
+#'
+#' The first block will be for ages 0-3, the second for > 3, and the last
+#' for mixed ages.
+#'
+#' @inheritParams make_order_numbers_for_group
+#'
+#' @return Character. Nested list described in the description.
+make_order_numbers <- function(n = 50) {
 
-  c(1:n_classes) |>
-    purrr::map_chr(.f = ~ make_draw(n_classes = .x)) |>
+  group_0_to_3 <- make_order_numbers_for_group(n = n)
+  group_3_plus <- make_order_numbers_for_group(n = n)
+  group_mixed <- make_order_numbers_for_group(n = n)
+
+  numbers_combined <- c(group_0_to_3, group_3_plus, group_mixed) |>
     paste(collapse = ";")
 
+  return(numbers_combined)
+
 }
 
-#' Make a set of draws for N childcare settings
+#' Make a data frame of class order numbers for each childcare setting
 #'
-#' @param n_settings Numeric. Number of settings for which to generate draws.
-#' @param n_classes Numeric. Number of (possible) classes for which to generate draws.
+#' @description
+#' Data frame of numbers to reorder classes and thereby select the first N
+#' randomly.
+#'
+#' @param n_settings Numeric. Number of settings for which to create numbers.
+#' @param n_classes Numeric. Maximum number of classes in a setting.
 #'
 #' @return Data frame. Consisting of:
 #'
 #' - `setting_id`. Simple count number that is an ID for each childcare setting.
 #' - `random_class_rowcodes`. Character string of random draws for a childcare
 #' setting of arbitrary number of classes/groups.
-#'
-#' @importFrom purrr map_chr
-make_class_draws_per_setting <- function(
+make_order_number_df <- function(
   n_settings,
-  n_classes = 200
+  n_classes = 50
 ) {
 
-  draws_as_vec <- purrr::map_chr(
+  numbers_as_vec <- purrr::map_chr(
     .x = c(1:n_settings),
-    .f = ~ make_draws_per_setting(n_classes = n_classes)
+    .f = ~ make_order_numbers(n = n_classes)
   )
 
-  draws_df <- data.frame(
+  numbers_df <- data.frame(
     setting_id = c(1:n_settings),
-    random_class_rowcodes = draws_as_vec
+    random_class_order = numbers_as_vec
   )
 
-  return(draws_df)
+  return(numbers_df)
 
 }

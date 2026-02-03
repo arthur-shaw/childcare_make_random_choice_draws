@@ -14,16 +14,17 @@ fs::path(proj_dir, "R") |>
 	purrr::walk(.f = ~ source(.x))
 
 # ==============================================================================
-# create 
+# create
 # ==============================================================================
 
-# create random selection data frame for preloading
-class_draws_df <- make_class_draws_per_setting(
-  n_settings = 150
+# create random class order numbers data frame for preloading
+class_order_numbers_df <- make_order_number_df(
+  n_settings = 150,
+  n_classes = 50
 )
 
 # write it to disk in SuSo-friendly tab-separated value format
 readr::write_tsv(
-  x = class_draws_df,
-  file = fs::path(proj_dir, "data", "random_class_selections.tsv")
+  x = class_order_numbers_df,
+  file = fs::path(proj_dir, "data", "random_class_order_numbers.tsv")
 )
