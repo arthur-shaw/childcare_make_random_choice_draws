@@ -1,0 +1,31 @@
+[workspace]
+authors = ["Arthur Shaw <jashaw2002@gmail.com>"]
+channels = ["conda-forge"]
+name = "childcare_make_random_choice_draws"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[activation.env]
+# set the R library folder to where conda installs R
+PIXI_R_LIBS =  "$CONDA_PREFIX/lib/R/library"
+R_LIBS = "$PIXI_R_LIBS"
+R_LIBS_USER = "$PIXI_R_LIBS"
+
+[tasks]
+
+[dependencies]
+# R
+r = "==4.5"
+# packages
+r-fs = "==2.1.0"
+r-purrr = "==1.2.2"
+r-readr = "==2.2.0"
+r-tidyr = "==1.3.2"
+r-dplyr = "==1.2.1"
+r-glue = "==1.8.1"
+r-here = "==1.0.2"
+# dev tools
+# development environment
+r-languageserver = "*"
+r-httpgd = "*"
+radian = "*"
