@@ -20,7 +20,7 @@ fs::path(proj_dir, "R") |>
 # create random class order numbers data frame for preloading
 class_order_numbers_df <- make_order_number_df(
   n_settings = 150,
-  n_classes = 50
+  n_classes = 60
 )
 
 # write it to disk in SuSo-friendly tab-separated value format

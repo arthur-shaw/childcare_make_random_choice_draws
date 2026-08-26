@@ -20,7 +20,7 @@ fs::path(proj_dir, "R") |>
 # create choices data frame for preloading
 choices_df <- make_random_choices_per_member(
   n_hholds = 2000,
-  n_members = 45,
+  n_members = 60,
   choices = c(1:60),
   n_choices = 6,
   seed = 8675309
