@@ -2,9 +2,6 @@
 # setup
 # ==============================================================================
 
-# activate project-specific virtual environment
-renv::restore(prompt = FALSE)
-
 # set paths
 proj_dir <- here::here()
 
