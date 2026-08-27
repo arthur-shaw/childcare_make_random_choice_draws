@@ -7,12 +7,101 @@ The CAPI applications for Childcare rely on preloaded random numbers:
 
 ## Installation 🔌
 
-Simply:
+Before you can use the project, you need to install two things:
 
-- Download the repository
-- Run the code
+- `pixi`, which manages the software needed by the project
+- the project environment, which includes the specific version of R and the R packages required by the project
 
-The `{renv}` lockfile does the necessary for setting and provisioning project-level dependencies.
+You only need to complete these steps once--that is, install once `pixi` once per device and set up the project environment once per project.
+
+### Install `pixi`
+
+This project uses `pixi` to automatically install and manage the specific version of R and the R packages that it needs. You do not need to install R or any packages separately.
+
+To install `pixi`, follow the installation instructions [here](https://pixi.prefix.dev/latest/installation/).
+
+<!-- TODO: add specific instructions for WBG-managed devices -->
+
+### Download the project
+
+To get the project code from GitHub to your your device:
+
+- Go to the project's GitHub repo
+- Click the `Code` button
+- Select `Download zip` and download
+- Save the zip file to your computer
+- Unzip the downloaded file
+- Remember where you saved the unzipped project folder, since you will need this for the next step
+
+<!-- TODO: add specific instructions for WBG-managed devices -->
+
+### Set up the project environment
+
+The project environment contains the specific version of R and the R packages required by the project. Pixi will download and install these for you.
+
+To do so:
+
+- Open the [project directory (folder)](#use-the-project-directory) in File Explorer.
+- Copy the directory path from File Explorer's address bar (e.g., `C:\Users\YourName\my-project`).
+- [Open PowerShell](#open-powershell).
+- [Navigate](#navigate-directories) to that [project directory](#use-the-project-directory) in PowerShell.
+- Run the `pixi install` command in that directory in PowerShell
+
+(Note: for users unfamiliar with PowerShell, follow the links above to find relevant parts of a primer on PowerShell.)
+
+`pixi` will download and install R and the required R packages. The first installation may take several minutes.
+
+When the installation is finished and the PowerShell prompt appears again, the project environment is ready to use.
+
+You only need to run `pixi install` when setting up the project for the first time. After that, follow the project's instructions for running it.
+
+## Working with PowerShell
+
+This project uses PowerShell, a Windows terminal application, to execute its actions--from setting up the project environment to running project workflows.
+
+The following is meant as a short primer on using PowerShell.
+
+### Open PowerShell
+
+For all practical purposes, PowerShell is an application like any other. With that in mind, opening it involves the same steps as opening any other application or program on your computer:
+
+- Open the Windows Start menu.
+- Type `PowerShell` in the menu's search bar
+- Click on PowerShell
+
+### Use the project directory
+
+The project directory is, simply put, the directory where the project files from GitHub live on your device--that is, the directory [where you unzipped them](#download-the-project).
+
+This directory is an important one. For all project commands to work, they need to be executed in that directory. In PowerShell, commands take effect in its active directory. For PowerShell commands to have effect in the project directory, the user needs to navigate there in PowerShell.
+
+### Navigate directories
+
+In File Explorer, one navigates to a directory by clicking through directories. In PowerShell, one navigates to a directory by using the `cd` ("change directory") command.
+
+To change directories in PowerShell, one needs to compose a command of the following form: `cd "{directory_path}"`, where `"{directory_path}"` is the path to the directory (e.g., `C:\UserName\my-directory`).
+
+To navigate directly to the directory for this project, should:
+
+- Open File Explorer
+- Navigate to the project directory in File Explorer
+- Copy the directory file path from File Explorer's address bar (e.g., `C:\Users\YourName\my-project`).
+- Open PowerShell
+- Compose the command to change directories: 
+  - Type `cd`
+  - Press `Space`
+  - Copy the project directory path from File Explorer
+  - Run `cd "C:\Users\UserName\my-project"`, replacing the example path with your project path.
+
+Note: the `"` marks around the directory file path are desirable in general and needed in particular when paths contain spaces (e.g. `C:\UserName\my path`).
+
+### Execute commands
+
+This simply involves writing a command and pressing `Enter`.
+
+For changing directories, the command looks something like follows: `cd "C:\Users\UserName\my-project"`
+
+For running `pixi` commands, type the command and press `Enter`. For example, type `pixi install` and press `Enter`.
 
 ## Usage 👩‍💻
 
