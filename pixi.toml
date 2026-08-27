@@ -12,6 +12,14 @@ R_LIBS = "$PIXI_R_LIBS"
 R_LIBS_USER = "$PIXI_R_LIBS"
 
 [tasks]
+demand-side = {
+  cmd = "RScript make_demand_side_draws.R",
+  description = "Demand-side: create random numbers for DCE images"
+}
+supply-side = {
+  cmd = "RScript make_supply_side_draws.R",
+  description = "Supply-side: create random numbers for classroom selection"
+}
 
 [dependencies]
 # R
