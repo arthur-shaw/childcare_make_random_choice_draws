@@ -25,6 +25,7 @@ supply-side = {
 # R
 r = "==4.5"
 # packages
+r-cli = "==3.6.6"
 r-fs = "==2.1.0"
 r-purrr = "==1.2.2"
 r-readr = "==2.2.0"

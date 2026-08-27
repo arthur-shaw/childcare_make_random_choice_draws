@@ -14,6 +14,8 @@ fs::path(proj_dir, "R") |>
 # create df of M random draws for N members in O households
 # ==============================================================================
 
+cli::cli_progress_step("Creating random numbers")
+
 # create choices data frame for preloading
 choices_df <- make_random_choices_per_member(
   n_hholds = 2000,
@@ -23,8 +25,14 @@ choices_df <- make_random_choices_per_member(
   seed = 8675309
 )
 
+cli::cli_progress_step("Writing to disk")
+
 # write it to disk in SuSo-friendly tab-separated value format
 readr::write_tsv(
   x = choices_df,
   file = fs::path(proj_dir, "data", "dce_choices.tsv")
+)
+
+cli::cli_alert_success(
+  text = "Numbers can be found in {.file data/dce_choices.tsv}"
 )
