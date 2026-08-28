@@ -105,12 +105,24 @@ For running `pixi` commands, type the command and press `Enter`. For example, ty
 
 ## Usage 👩‍💻
 
-The TL;DR:
+The project has workflows for the demand-side and supply-side surveys.
 
-- Run the relevant script
-- Find the output `tsv` file in `data/`
+For each workflow:
+
+1. **Configure.**
+  - Open the workflow's R script
+  - Edit parameters, as needed
+  - Save the updated script
+2. **Run.**
+  - Open PowerShell
+  - Run the relevant `pixi` task
+3. **Retrieve.** Find the resulting `.tsv` file in `data/`.
+
+The following sections explain this in further detail for each survey.
 
 ### Demand-side 👨‍👩‍👧‍👦
+
+#### Configure
 
 To set up:
 
@@ -130,7 +142,11 @@ choices_df <- make_random_choices_per_member(
 )
 ```
 
-To use, run `make_demand_side_draws.R`
+#### Run
+
+To use, run `pixi run demand-side` in PowerShell while in the [project directory](#use-the-project-directory).
+
+#### Retreive
 
 The resulting output in `data/dce_choices.tsv` has the following structure
 
@@ -158,6 +174,8 @@ hhid	choices
 
 ### Supply-side 🏫
 
+#### Configure
+
 To set up:
 
 - Open `make_supply_side_draws.R`
@@ -173,7 +191,11 @@ class_order_numbers_df <- make_order_number_df(
 )
 ```
 
-To use, run `make_supply_side_draws.R`
+#### Run
+
+To use, run `pixi run supply-side` in PowerShell while in the [project directory](#use-the-project-directory).
+
+#### Retreive
 
 The resulting output in `data/random_class_order_numbers.tsv` has the following structure:
 
