@@ -1,9 +1,11 @@
 ## Objective 🎯
 
-The CAPI applications for Childcare rely on preloaded random numbers:
+The CAPI applications for Childcare rely on preloaded random numbers to facilitate random selection:
 
 - **Demand-side.** Choose N images to show in the discrete choice experiment.
 - **Supply side.** Choose 2 classrooms to observe.
+
+This project creates these random numbers as tab-delimited data that can be preloaded into survey assignments.
 
 ## Installation 🔌
 
@@ -12,7 +14,7 @@ Before you can use the project, you need to install two things:
 - `pixi`, which manages the software needed by the project
 - the project environment, which includes the specific version of R and the R packages required by the project
 
-You only need to complete these steps once--that is, install once `pixi` once per device and set up the project environment once per project.
+You only need to complete these steps once--that is, install `pixi` once per device and set up the project environment once per project.
 
 ### Install `pixi`
 
@@ -24,7 +26,7 @@ To install `pixi`, follow the installation instructions [here](https://pixi.pref
 
 ### Download the project
 
-To get the project code from GitHub to your your device:
+To get the project code from GitHub to your device:
 
 - Go to the project's GitHub repo
 - Click the `Code` button
@@ -45,9 +47,9 @@ To do so:
 - Copy the directory path from File Explorer's address bar (e.g., `C:\Users\YourName\my-project`).
 - [Open PowerShell](#open-powershell).
 - [Navigate](#navigate-directories) to that [project directory](#use-the-project-directory) in PowerShell.
-- Run the `pixi install` command in that directory in PowerShell
+- Run the the following command in PowerShell: `pixi install`
 
-(Note: for users unfamiliar with PowerShell, follow the links above to find relevant parts of a primer on PowerShell.)
+For more information on any step or concept above, follow the links provided.
 
 `pixi` will download and install R and the required R packages. The first installation may take several minutes.
 
@@ -59,7 +61,7 @@ You only need to run `pixi install` when setting up the project for the first ti
 
 This project uses PowerShell, a Windows terminal application, to execute its actions--from setting up the project environment to running project workflows.
 
-The following is meant as a short primer on using PowerShell.
+The following is a short primer on the parts of PowerShell that you will need to use this project. You do not need to learn PowerShell generally.
 
 ### Open PowerShell
 
@@ -69,11 +71,21 @@ For all practical purposes, PowerShell is an application like any other. With th
 - Type `PowerShell` in the menu's search bar
 - Click on PowerShell
 
+Once open, PowerShell will display a prompt like this:
+
+```
+PS C:\Users\YourName>
+```
+
+Commands are entered after the `>` symbol. The path shown before the `>` tells you which directory PowerShell is currently using.
+
 ### Use the project directory
 
 The project directory is, simply put, the directory where the project files from GitHub live on your device--that is, the directory [where you unzipped them](#download-the-project).
 
-This directory is an important one. For all project commands to work, they need to be executed in that directory. In PowerShell, commands take effect in its active directory. For PowerShell commands to have effect in the project directory, the user needs to navigate there in PowerShell.
+This directory is an important one. Project commands in this README should be run from the project directory.
+
+In PowerShell, the active directory is the directory where commands are currently being run. Before running a project command, make sure the active directory is the project directory.
 
 ### Navigate directories
 
@@ -87,11 +99,7 @@ To navigate directly to the directory for this project, should:
 - Navigate to the project directory in File Explorer
 - Copy the directory file path from File Explorer's address bar (e.g., `C:\Users\YourName\my-project`).
 - Open PowerShell
-- Compose the command to change directories: 
-  - Type `cd`
-  - Press `Space`
-  - Copy the project directory path from File Explorer
-  - Run `cd "C:\Users\UserName\my-project"`, replacing the example path with your project path.
+- Type `cd` , paste the path, and press `Enter` (e.g., `cd "C:\Users\UserName\my-project"`)
 
 Note: the `"` marks around the directory file path are desirable in general and needed in particular when paths contain spaces (e.g. `C:\UserName\my path`).
 
@@ -99,9 +107,9 @@ Note: the `"` marks around the directory file path are desirable in general and 
 
 This simply involves writing a command and pressing `Enter`.
 
-For changing directories, the command looks something like follows: `cd "C:\Users\UserName\my-project"`
+When you run a project command, PowerShell may display several lines of text while the task is running. This is normal. Do not close the PowerShell window while the command is running.
 
-For running `pixi` commands, type the command and press `Enter`. For example, type `pixi install` and press `Enter`.
+When the command finishes, the PowerShell prompt will appear again.
 
 ## Usage 👩‍💻
 
@@ -134,8 +142,8 @@ In particular:
 
 ```r
 choices_df <- make_random_choices_per_member(
-  n_hholds = 2000, # <-------  CHANGE THIS VALUE
-  n_members = 45,
+  n_hholds = 2000, # <-------  MUST CHANGE THIS VALUE
+  n_members = 45, # <-------  MAY CHANGE THIS VALUE
   choices = c(1:60),
   n_choices = 6,
   seed = 8675309
@@ -186,8 +194,8 @@ In particular:
 
 ```r
 class_order_numbers_df <- make_order_number_df(
-  n_settings = 150, # <--------- CHANGE THIS VALUE
-  n_classes = 50
+  n_settings = 150, # <--------- MUST CHANGE THIS VALUE
+  n_classes = 50 # <--------- MAY CHANGE THIS VALUE
 )
 ```
 
